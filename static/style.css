@@ -1,0 +1,384 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background: linear-gradient(135deg, #001a0d 0%, #003319 50%, #001f10 100%);
+    display: flex;
+    line-height: 1.6;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+    position: relative;
+    /* overflow: hidden; */
+    background: radial-gradient(ellipse at bottom, #001a0d 0%, #000 100%);
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    right: 0;
+    height: 200%;
+    background-image: 
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 40px,
+            rgba(0, 255, 65, 0.027) 40px,
+            rgba(0, 255, 65, 0.027) 41px
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 40px,
+            rgba(0, 255, 65, 0.018) 40px,
+            rgba(0, 255, 65, 0.018) 41px
+        );
+    animation: matrixScroll 20s linear infinite;
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+
+/* experimental codeeee startssssss  */
+/* Static Twinkling Stars (subtle base layer, like Grok's field) */
+/* Static Twinkling Stars (now bigger & punchier) */
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(4px 4px at 20px 30px, #00ff41, transparent), /* Bumped to 4px */
+        radial-gradient(3px 3px at 40px 70px, rgba(0,255,65,0.9), transparent), /* 3px + higher alpha */
+        radial-gradient(3px 3px at 90px 40px, #00ff41, transparent), /* Consistent sizing */
+        radial-gradient(2px 2px at 130px 80px, rgba(0,255,65,0.7), transparent),
+        radial-gradient(4px 4px at 160px 20px, #00ff41, transparent), /* Added extra for density */
+        radial-gradient(3px 3px at 200px 90px, rgba(0,255,65,0.8), transparent);
+    background-repeat: repeat;
+    background-size: 150px 80px; /* Smaller size for more stars across screen */
+    animation: twinkle 3s ease-in-out infinite alternate; /* Faster twinkle for visibility */
+    pointer-events: none;
+    opacity: 0.8; /* Upped from 0.6 for more glow */
+    z-index: 0;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.6; transform: scale(1); } /* Subtle base */
+    50% { opacity: 1; transform: scale(1.2); } /* Bigger pulse */
+}
+/* Shooting Stars Container & Elements */
+.stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1; /* Above matrix, below content */
+    overflow: hidden;
+}
+
+.shooting-star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: linear-gradient(45deg, transparent, #00ff41, transparent); /* Green tail glow */
+    border-radius: 50%;
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    animation: shoot linear infinite;
+    filter: drop-shadow(0 0 6px rgba(0,255,65,0.8)); /* Grok-like glow */
+    opacity: 0;
+}
+
+.shooting-star::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px; /* Tail length */
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0,255,65,0.8), transparent);
+    transform: translateX(-50px) translateY(-1px) rotate(45deg);
+}
+
+@keyframes shoot {
+    0% {
+        transform: translateX(-100vw) translateY(100vh) rotate(45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100vw) translateY(-100vh) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+/* Stagger 5-10 stars for meteor shower feel (Grok spawns ~1-2/sec) */
+.shooting-star:nth-child(1) { top: 20%; animation-duration: 4s; animation-delay: 0s; }
+.shooting-star:nth-child(2) { top: 40%; animation-duration: 5s; animation-delay: 1s; }
+.shooting-star:nth-child(3) { top: 60%; animation-duration: 3.5s; animation-delay: 2.5s; }
+.shooting-star:nth-child(4) { top: 80%; animation-duration: 4.5s; animation-delay: 0.5s; }
+.shooting-star:nth-child(5) { top: 10%; animation-duration: 6s; animation-delay: 3s; }
+/* Add more nth-child for density, or JS for random spawn */
+
+/* experimental codeee endsssss  */
+
+
+
+@keyframes matrixScroll {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(50%); }
+}
+
+h1 {
+    color: #00ff41;
+    font-size: 4rem;
+    margin-bottom: 1rem; /* REDUCED from 2rem */
+    margin-top: 0; /* ADDED - removes default top margin */
+    letter-spacing: 5px;
+    text-shadow: 
+        0 0 18px rgba(0, 255, 65, 0.72),
+        0 0 36px rgba(0, 255, 65, 0.36);
+    position: relative;
+    z-index: 1;
+    font-family: 'Courier New', monospace;
+    font-weight: 400;
+}
+
+.head-container,.bottom-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 1.5rem;
+    width: 90%;
+    max-width: 1400px;
+    background: rgba(0, 20, 10, 0.85);
+    padding: 1rem;
+    margin-bottom: 3rem; /* ADDED - breathing space at the bottom */
+    border-radius: 8px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.8),
+        inset 0 0 50px rgba(0, 255, 65, 0.045);
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(0, 255, 65, 0.27);
+    backdrop-filter: blur(10px);
+}
+
+
+.cat-1, .cat-2, .carrotDiv {
+    background: linear-gradient(135deg, #00ff41 0%, #00d435 100%);
+    border: 2px solid #00aa2e;
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 
+        0 0 54px rgba(0, 255, 65, 0.36),
+        0 10px 40px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    position: relative;
+}
+
+.cat-1 label, .cat-2 label {
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+    text-align: center;
+    color: #001a0d;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
+}
+
+.cat-1 input, .cat-2 input {
+    width: 90%;
+    padding: 0.8rem;
+    margin-bottom: 0.6rem;
+    border-radius: 4px;
+    border: 2px solid #00aa2e;
+    background: rgba(0, 26, 13, 0.9);
+    color: #00ff41;
+    font-weight: 500;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+}
+
+.cat-1 input::placeholder, .cat-2 input::placeholder {
+    color: rgba(0, 255, 65, 0.5);
+}
+
+.cat-1 input:focus, .cat-2 input:focus {
+    outline: none;
+    border-color: #00ff41;
+    box-shadow: 0 0 13.5px rgba(0, 255, 65, 0.45);
+    background: rgba(0, 26, 13, 1);
+}
+
+.cat-1 button, .cat-2 button, .bottom-container button {
+    padding: 0.8rem 2.2rem;
+    margin-bottom: 1rem;
+    background: rgba(0, 26, 13, 0.95);
+    color: #00ff41;
+    border: 2px solid #00aa2e;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.cat-1 button:hover, .cat-2 button:hover , .bottom-container button:hover{
+    background: rgba(0, 51, 25, 0.95);
+    border-color: #00ff41;
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 30px rgba(0, 255, 65, 0.36),
+        0 0 36px rgba(0, 255, 65, 0.18);
+}
+
+.unordered1, .unordered2, .intersectedItems {
+    width: 100%;
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 1rem;
+    margin: 0;
+    list-style-position: inside;
+}
+
+.unordered1 li, .unordered2 li , .intersectedItems li{
+    padding: 0.7rem;
+    margin-bottom: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+    word-wrap: break-word;
+    color: #001a0d;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+    font-family: 'Courier New', monospace;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    font-weight: 700;
+}
+
+.unordered1 li:hover, .unordered2 li:hover , .intersectedItems li:hover{
+    background: rgba(0, 0, 0, 0.5);
+    border-left-color: #001a0d;
+    transform: translateX(4px);
+}
+
+.unordered1::-webkit-scrollbar,
+.unordered2::-webkit-scrollbar, .intersectedItems::-webkit-scrollbar {
+    width: 10px;
+}
+
+.unordered1::-webkit-scrollbar-track,
+.unordered2::-webkit-scrollbar-track, .intersectedItems::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+}
+
+.unordered1::-webkit-scrollbar-thumb,
+.unordered2::-webkit-scrollbar-thumb , .intersectedItems::-webkit-scrollbar-thumb {
+    background: rgba(0, 170, 46, 0.8);
+    border-radius: 5px;
+    border: 1px solid rgba(0, 255, 65, 0.27);
+}
+
+.unordered1::-webkit-scrollbar-thumb:hover,
+.unordered2::-webkit-scrollbar-thumb:hover, .intersectedItems::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 65, 0.9);
+    box-shadow: 0 0 9px rgba(0, 255, 65, 0.45);
+}
+
+
+
+/* experimental code  */
+/* Middle container for artist profiles */
+.middle-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 1.5rem;
+    width: 90%;
+    max-width: 1400px;
+    background: rgba(0, 20, 10, 0.85);
+    padding: 1rem;
+    margin-bottom: 3rem;
+    border-radius: 8px;
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.8),
+        inset 0 0 50px rgba(0, 255, 65, 0.045);
+    position: relative;
+    z-index: 1;
+    border: 1px solid rgba(0, 255, 65, 0.27);
+    backdrop-filter: blur(10px);
+}
+
+.artist-profile-1, .artist-profile-2 {
+    background: linear-gradient(135deg, #00ff41 0%, #00d435 100%);
+    border: 2px solid #00aa2e;
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: 45%;
+    box-shadow: 
+        0 0 54px rgba(0, 255, 65, 0.36),
+        0 10px 40px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+.artist-profile-1 h3, .artist-profile-2 h3 {
+    color: #001a0d;
+    font-family: 'Courier New', monospace;
+    font-size: 1.3rem;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.top-artists-1, .top-artists-2 {
+    list-style-position: inside;
+    padding: 0;
+    margin: 0;
+    counter-reset: artist-counter;
+}
+
+.top-artists-1 li, .top-artists-2 li {
+    padding: 0.8rem;
+    margin-bottom: 0.6rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    color: #001a0d;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+    list-style: none;
+    counter-increment: artist-counter;
+}
+
+.top-artists-1 li::before, .top-artists-2 li::before {
+    content: counter(artist-counter) ". ";
+    font-weight: 900;
+    color: #00aa2e;
+    margin-right: 0.5rem;
+}
+
+.top-artists-1 li:hover, .top-artists-2 li:hover {
+    background: rgba(0, 0, 0, 0.5);
+    border-left-color: #001a0d;
+    transform: translateX(4px);
+}

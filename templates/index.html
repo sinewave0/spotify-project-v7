@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v7.0 beta </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="stars-container">
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+  
+</div>
+    <!-- <h1>do our souls sync?</h1> -->
+    <div class="head-container">
+        <div class="cat-1">
+            smoll container1 
+            <label for="inputURL1">Enter the Spotify user URL</label>
+            <input type="text" id="inputURL1"/>
+            <button type="submit" class="submit1">Submitt</button>
+            <ul class="unordered1">
+
+            </ul>
+            <button type="submit" class="downloadAllOne">Download all songs 1</button>
+            <button type="submit" class="masterDownloader">Downld fm the FILE</button>
+        </div>
+        <div class="cat-2">
+            smoll container2
+            <label for="inputURL2">Enter the Spotify user URL</label>
+            <input type="text" id="inputURL2"/>
+            <button type="submit" class="submit2">Submittttt</button>
+            <ul class="unordered2">
+
+            </ul>
+        </div>
+    </div>
+    <div class="middle-container">
+        <div class="artist-profile-1">
+            <h3>The top 3 artits are: </h3>
+            <ol class=  "top-artists-1">
+
+            </ol>
+        </div>
+        <div class="artist-profile-2">
+            <h3>The top 3 artits are: </h3>
+            <ol class=  "top-artists-2">
+                
+            </ol>
+        </div>
+
+    </div>
+
+    <div class="bottom-container">
+
+        <button type="submit" class="intersectionButton">Click here for intersection Data</button>
+        <div class="carrotDiv">
+            <ul class="intersectedItems">
+
+            </ul>
+        </div>
+    </div>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</body>
+</html>
