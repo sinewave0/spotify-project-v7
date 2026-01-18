@@ -164,6 +164,7 @@ submitBtn1.addEventListener("click", async function() {
             songData.forEach(item =>{
                 if(item && item.track && item.track.name && !uniqueSongs1.has(item.track.name)){
                     uniqueSongs1.add(item.track.name)
+                    
                     const listItem = document.createElement('li');
                     listItem.textContent = item.track.name;
                     songList1.appendChild(listItem);
